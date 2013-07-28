@@ -5,8 +5,20 @@
 <h1>Habitual</h1>
 <div id="interaction>">
 	<form>
-		<input id="title" name="title" class="user-input" placeholder="Enter a task...">
-		<button type="button" onclick="addIt();">Add It</button>
+		<fieldset>
+			<label name="title">Title</label><input id="title" name="title" class="user-input" placeholder="Enter a task...">
+			<br>
+			<p>When should this occur?</p>
+			<label><input type="checkbox" name="days[]" value="1">Sunday</label><br>
+			<label><input type="checkbox" name="days[]" value="2">Monday</label><br>
+			<label><input type="checkbox" name="days[]" value="3">Tuesday</label><br>
+			<label><input type="checkbox" name="days[]" value="4">Wednesday</label><br>
+			<label><input type="checkbox" name="days[]" value="5">Thursday</label><br>
+			<label><input type="checkbox" name="days[]" value="6">Friday</label><br>
+			<label><input type="checkbox" name="days[]" value="7">Saturday</label><br>
+			<br>
+			<button type="button" onclick="addIt();">Add It</button>
+		</fieldset>
 	</form>
 </div>
 <h2>Result Set</h2>
