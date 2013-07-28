@@ -1,7 +1,7 @@
 if(typeof(Storage)!=="undefined")
   {
   localStorage.task="20 pushups";
-  document.getElementById("result").innerHTML="Task: " + localStorage.lastname;
+  document.getElementById("result").innerHTML="Task: " + localStorage.task;
   }
 else
   {
