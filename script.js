@@ -1,7 +1,7 @@
 if(typeof(Storage)!=="undefined")
   {
-  localStorage.task="20 pushups";
-  document.getElementById("result").innerHTML="Task: " + localStorage.task;
+  localStorage.task2="15 minutes of guitar";
+  document.getElementById("result").innerHTML="Task: " + localStorage.task + "<br>" + localStorage.task2;
   }
 else
   {
