@@ -258,7 +258,7 @@ div#interaction form p {
 }
 
 #page section {
-	padding: 10px 10px 40px 10px;
+	padding: 10px 0px 40px 0px;
 }
 
 li.js-clickable {
@@ -266,6 +266,14 @@ li.js-clickable {
 }
 li.js-clickable:hover {
 	color: #777;
+}
+
+#page section ul li {
+	height: 30px;
+	background-color: rgba(255,255,255,0.5);
+	border-bottom: 1px solid rgba(0,0,0,0.2);
+	border-top: 1px solid rgba(0,0,0,0.1);
+	padding: 3px 10px 0 10px;
 }
 
 
