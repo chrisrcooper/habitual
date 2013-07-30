@@ -123,7 +123,7 @@ function addIt() {
 	}
 	
 
-	//console.log('Added: '+title+' '+days+' '+tasks.time.hour+':'+tasks.time.minute+'Total tasks: '+Object.keys(tasks).length);
+	console.log('Added: '+title+' '+days+' '+$('input#hours').val()+':'+$('input#minutes').val()+' Total tasks: '+Object.keys(tasks).length);
 	//console.log(tasks);
 	
 	localStorage.display=JSON.stringify(tasks);
