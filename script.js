@@ -147,11 +147,6 @@ function dailyAgenda() {
 	var titleDisplay = '';
 	
 	var d = new Date();
-/*
-	getHours()
-	getMinutes()
-*/
-
 	var currentDay = d.getDay()+1; 
 	
 	var weekday=new Array(7);
@@ -163,15 +158,23 @@ function dailyAgenda() {
 	weekday[5]="Friday";
 	weekday[6]="Saturday";
 
-	var dayName = weekday[currentDay-1]; 
+	 
 	
-	$.each(tasks, function(index, value) {
-		if(value.days.indexOf(currentDay.toString()) > -1) {
-			titleDisplay += '<li class="js-clickable" data-id='+index+'>'+value.title+'</li>';
-		}
-	}); 
+	for(var i=0;i<7;i++){
+		if(currentDay > 7)
+			currentDay = currentDay - 7;
+		var dayName = weekday[currentDay-1];
+		$.each(tasks, function(index, value) {
+			if(value.days.indexOf(currentDay.toString()) > -1) {
+				titleDisplay += '<li class="js-clickable" data-id='+index+'>'+value.title+'</li>';
+			}
+		}); 
+		taskSetDisplay += '<h3>'+dayName+'</h3><ul>'+titleDisplay+'</ul>';
+		titleDisplay = '';
+		currentDay++;
+	}
 	
-	taskSetDisplay += '<h3>'+dayName+'</h3><ul>'+titleDisplay+'</ul>';
+	
 	$('#agenda').fadeOut(function(){
 		$(this).html(taskSetDisplay).fadeIn();
 	});
