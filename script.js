@@ -15,7 +15,7 @@ $(document).ready(function(){
 		var tasks = JSON.parse(localStorage.display);
 		
 		var $form = $('div#interaction form');
-		
+					
 		//Set form attribute 'data-id' to index number of item being edited
 		$form.attr('data-id',taskId); 
 						
@@ -87,12 +87,12 @@ function addIt() {
 	}
 	
 	//Reset title field to null
-	$('input#title').val('');
+	//$('input#title').val('');
 	
 	//For each checked input box, push the value to the array "days", then uncheck box.
 	$('input:checked').each(function(){
 		days.push($(this).val());
-		$(this).prop('checked',false);
+	//	$(this).prop('checked',false);
 	});	
 	
 	//Set object "tasks" to what was previously saved to local storage
@@ -122,7 +122,10 @@ function addIt() {
 		});
 	}
 	
-
+	//Reset form
+	$form[0].reset();
+	$form.attr('data-id','');
+	
 	console.log('Added: '+title+' '+days+' '+$('input#hours').val()+':'+$('input#minutes').val()+' Total tasks: '+Object.keys(tasks).length);
 	//console.log(tasks);
 	
