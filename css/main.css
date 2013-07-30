@@ -92,19 +92,174 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+body {
+	background-image: url(../img/bg-body.png);
+	background-color: #0b1551;
+	font-family: "Georgia", serif;
+	color: #343434;
+}
+#page {
+	width: 100%;
+	
+	min-height: 1200px;
+	
+	max-width: 480px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	margin: 0 auto;
+	background-image: url(../img/bg-page.png);
+	background-color: #e1e5fe;
+	box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.35);
+	
+	position: relative;
+}
+h1 {
+	margin: 0 0 20px 0;
+	font-size: 1.8em;
+}
+h1 a {
+	display: block;
+	font-family: "Lucida Handwriting", cursive, sans-serif;
+	font-weight: normal;
+	font-style: italic;
+	text-align: left;
+	background-color: #e47c7c;
+	color: #ffebeb;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.25);
+	text-transform: capitalize;
+	padding: 5px 20px;
+	border-bottom: 2px solid #b66060;
+	text-decoration: none;
+	
+	-moz-transition: color 300ms;
+}
+h1 a:hover {
+	color: #fff;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.45);
+	
+}
+legend {
+	font-family: "Georgia", sans-serif;
+	font-weight: normal;
+	text-shadow: 0 1px 0 #fff;
+	font-size: 1.3em;
+	color: #e47c7c;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px dotted #eee;
+}
 
+h2 {
+	font-family: "Lucida Handwriting", cursive, serif;
+	color: #0b1551;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.85);
+	font-size: 1.5em;
+}
 
+h3 {
+	font-family: "Tahoma", "Geneva", sans-serif;
+	font-weight: normal;
+	color: #333;
+	font-size: 1.1em;
+}
 
+ul, li {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
 
+div#interaction {
+	position: absolute;
+	height: 360px;
+	width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	top: -360px;
+	background-color: rgba(255,255,255,0.96);
+}
+div#interaction a.toggler {
+	position: absolute;
+	bottom: -24px;
+	display: block;
+	line-height: 14px;
+	padding: 5px 10px;
+	background-color: #fff;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	right: 10px;
+	text-transform: uppercase;
+	font-size: 0.8em;
+	font-family: "Tahoma", "Geneva", sans-serif;
+	color: #aaa;
+	cursor: pointer;
+	text-shadow: 0 1px 0 #ddd;
+}
+div#interaction a.toggler:hover {
+	color: #333;
+}
 
+div#interaction form {
+	padding: 10px;
+}
+#page input[type=checkbox] {
+	margin-right: 0.5em;
+}
+div#interaction form button {
+	border: 0 none;
+	background-color: transparent;
+	background-image: none;
+	border-radius: 0;
+	padding: 0;
+	margin: 0;
+	
+	background-color: #E47C7C;
+	border-radius: 10px;
+	color: #ffebeb;
+	padding: 5px 10px 3px 10px;
+	
+	text-transform: uppercase;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+	font-size: 0.8em;
+}
+div#interaction form button.negative {
+	color: #333;
+}
 
+div#interaction form button:hover {
+	color: #fff;
+}
 
+div#interaction form div.left {
+	float: left;
+	width: 48%;
+	margin-right: 4%;
+}
+div#interaction form div.right {
+	margin-left: 52%;
+}
+div#interaction form div.controls {
+	text-align: right;
+	margin-top: 10px;
+	padding-top: 10px;
+	border-top: 1px dotted #eee;
+}
+#page label {
+	font-family: "Tahoma", "Geneva", sans-serif;
+	font-size: 0.8em;
+}
+div#interaction form input {
+	font-size: 0.9em;
+}
+div#interaction form span,
+div#interaction form p {
+	color: #999;
+	font-size: 0.9em;
+}
 
-
-
-
-
-
+#page section {
+	padding: 10px 10px 40px 10px;
+}
 
 
 
