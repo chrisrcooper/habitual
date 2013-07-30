@@ -4,7 +4,7 @@ $(document).ready(function(){
 	  {
 		dailyAgenda();
 		updateThisOneTinyField();
-		timeAlert();
+		dailyAlert();
 	  }
 	else
 	{
@@ -50,14 +50,25 @@ function init(){
 	}
 }
 
-function timeAlert() {
-// setup our daily alerter
+function dailyAlert() {
+	var tasks = JSON.parse(localStorage.display);
+	var taskSetDisplay = '';
+		
+	var d = new Date();
+	var currentDay = d.getDay()+1; 
+			
 	setInterval(function() {
-		console.log('checking at the interval...');
-    	if(currentDay == 3) {
-	    	alert('You need to complete a task today!');
+		console.log('Checking for 0530, every 1 minute '+d.getHours()+d.getMinutes());
+		if(d.getHours() == '16' && d.getMinutes() == '16') {
+			var titleDisplay = '';
+			$.each(tasks, function(index, value) {
+				if(value.days.indexOf(currentDay.toString()) > -1) {
+				titleDisplay += value.title;
+			}
+		}); 
+		alert('You need to complete a task today!'+titleDisplay);
     	}
-	}, 600000); //every 600 seconds
+	}, 60000); //every 60 seconds
 }
 	
 	
