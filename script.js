@@ -105,6 +105,15 @@ function dailyAgenda() {
 			titleDisplay += '<li class="js-clickable" data-id='+index+'>'+value.title+'</li>';
 		}
 	}); 
+	
+	// setup our daily alerter
+	setInterval(function() {
+		console.log('checking at the interval...');
+    	if(currentDay == 3) {
+	    	alert('You need to complete a task today!');
+    	}
+	}, 60000); //every 60 seconds
+	
 	taskSetDisplay += '<h3>'+dayName+'</h3><ul>'+titleDisplay+'</ul>';
 	$('#agenda').fadeOut(function(){
 		$(this).html(taskSetDisplay).fadeIn();
