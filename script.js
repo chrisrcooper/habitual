@@ -16,6 +16,9 @@ $(document).ready(function(){
 		
 		var $form = $('div#interaction form');
 		
+		//Set form attribute 'data-id' to index number of item being edited
+		$form.attr('data-id',taskId); 
+						
 		//change the input title
 		var title = tasks[taskId].title;
 		$form.find('input#title').val(title).focus();
@@ -31,6 +34,9 @@ $(document).ready(function(){
 			});
 		}
 		
+		//change the input times
+		$form.find('input#hours').val(tasks[taskId].time.hour);
+		$form.find('input#minutes').val(tasks[taskId].time.minute);
 	});
 });
 
@@ -42,8 +48,8 @@ function init(){
 			title: 'My First Task',
 			days: ["3","5"],
 			time: {
-				hour: "00",
-				minute: "00"
+				hour: "01",
+				minute: "27"
 			}
 		});
 		localStorage.display=JSON.stringify(tasks);	
@@ -54,7 +60,7 @@ function dailyAlert() {
 	setInterval(function() {
 		var d = new Date();
 		var currentDay = d.getDay()+1;
-		if(d.getHours() == '16' && d.getMinutes() == '28') {
+		if(d.getHours() == '05' && d.getMinutes() == '30') {
 			var tasks = JSON.parse(localStorage.display);
 			var titleDisplay = '';
 			$.each(tasks, function(index, value) {
@@ -65,7 +71,7 @@ function dailyAlert() {
 		alert('You need to complete a task today!\n'+titleDisplay);
     	}
 		console.log('Checking for 0530, every 1 minute '+d.getHours()+d.getMinutes());
-	}, 10000); //every 10 seconds
+	}, 60000); //every 10 seconds
 }
 	
 	
@@ -73,7 +79,7 @@ function dailyAlert() {
 function addIt() {
 	var title = $('input#title').val();	//Stores title from HTML
 	var days = [];
-			
+				
 	//Check for empty fields
 	if(title == '' || $('input:checked').length == 0) {
 		alert('No empty fields, boss!');
@@ -89,18 +95,34 @@ function addIt() {
 		$(this).prop('checked',false);
 	});	
 	
-	//Set array "tasks" to what was previously saved to local storage
+	//Set object "tasks" to what was previously saved to local storage
 	var tasks = JSON.parse(localStorage.display);
 	
-	//Add to "tasks" new items user just submitted.
-	tasks.push({
-		title: title,
-		days: days,
-		time: {
-			hour: $('input#hours').val(),
-			minute: $('input#minutes').val()
-		}
-	});
+	var $form = $('div#interaction form');
+		
+	if($form.attr('data-id')) {
+		tasks[$form.attr('data-id')] = {
+			title: title,
+			days: days,
+			time: {
+				hour: $('input#hours').val(),
+				minute: $('input#minutes').val()
+			}
+		};
+	}
+	else{
+		//Add to "tasks" new items user just submitted.
+		tasks.push({
+			title: title,
+			days: days,
+			time: {
+				hour: $('input#hours').val(),
+				minute: $('input#minutes').val()
+			}
+		});
+	}
+	
+	//console.log('Added: '+title+' '+days+' '+time+'Total tasks: '+Object.keys(tasks).length);
 	//console.log(tasks);
 	
 	localStorage.display=JSON.stringify(tasks);
