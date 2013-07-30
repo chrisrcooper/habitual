@@ -20,41 +20,52 @@
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
-
-        <h1>Habitual</h1>
-		<div id="interaction">
-			<form>
-				<fieldset>
-					<label name="title">Title</label><input id="title" name="title" class="user-input" placeholder="Enter a task...">
-					<br>
-					<p>When should this occur?</p>
-					<label><input type="checkbox" name="days[]" value="1">Sunday</label><br>
-					<label><input type="checkbox" name="days[]" value="2">Monday</label><br>
-					<label><input type="checkbox" name="days[]" value="3">Tuesday</label><br>
-					<label><input type="checkbox" name="days[]" value="4">Wednesday</label><br>
-					<label><input type="checkbox" name="days[]" value="5">Thursday</label><br>
-					<label><input type="checkbox" name="days[]" value="6">Friday</label><br>
-					<label><input type="checkbox" name="days[]" value="7">Saturday</label><br>
-					<br>
-					<label>Time:
-						<input name="hours" id="hours" placeholder="HH" maxlength="2" size="2">
-						&nbsp;:&nbsp;
-						<input name="minutes" id="minutes" placeholder="MM" maxlength="2" size="2">
-					</label>
-					<br>
-					<button type="button" onclick="addIt();">Add It</button>
-					<button type="button" onclick="wipeIt();">Wipe It</button>
-				</fieldset>
-			</form>
-		</div>
-		
-		<h2>Agenda</h2>
-		<div id="agenda">
-		</div>
-		<hr>
-		
-		<h2>Result Set</h2>
-		<div id="result">
+		<div id="page">
+			<div id="interaction">
+				<form>
+					<legend>Add a New Task</legend>
+					<fieldset>
+						<div class="left">
+							<input id="title" name="title" class="user-input" placeholder="Enter a task name...">
+							<p>Task titles should describe the task at hand. Lorem ipsum dolar sumit sit amit. Lorem dolar. Summit. Lipsum.
+						</div>
+						<div class="right">
+							<span>When should this occur?</span>
+							<br>
+							<label><input type="checkbox" name="days[]" value="1">Sunday</label><br>
+							<label><input type="checkbox" name="days[]" value="2">Monday</label><br>
+							<label><input type="checkbox" name="days[]" value="3">Tuesday</label><br>
+							<label><input type="checkbox" name="days[]" value="4">Wednesday</label><br>
+							<label><input type="checkbox" name="days[]" value="5">Thursday</label><br>
+							<label><input type="checkbox" name="days[]" value="6">Friday</label><br>
+							<label><input type="checkbox" name="days[]" value="7">Saturday</label><br>
+							<br>
+							<label>Time:
+								<input name="hours" id="hours" placeholder="HH" maxlength="2" size="2">
+								&nbsp;:&nbsp;
+								<input name="minutes" id="minutes" placeholder="MM" maxlength="2" size="2">
+							</label>
+						</div>
+						<div class="controls">
+							<button type="button" onclick="addIt();">Add It</button>
+							<button type="button" onclick="wipeIt();" class="negative">Wipe It</button>
+						</div>
+					</fieldset>
+				</form>
+				<a class="toggler">Add</a>
+			</div>
+			
+	        <h1><a href="#">Habitual</a></h1>
+			<section>
+				<h2>Agenda</h2>
+				<div id="agenda">
+				</div>
+			</section>
+			<section>
+				<h2>Result Set</h2>
+				<div id="result">
+				</div>
+			</section>
 		</div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
