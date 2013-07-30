@@ -261,6 +261,12 @@ div#interaction form p {
 	padding: 10px 10px 40px 10px;
 }
 
+li.js-clickable {
+	cursor: pointer;
+}
+li.js-clickable:hover {
+	color: #777;
+}
 
 
 
