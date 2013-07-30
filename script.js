@@ -4,6 +4,7 @@ $(document).ready(function(){
 	  {
 		dailyAgenda();
 		updateThisOneTinyField();
+		timeAlert();
 	  }
 	else
 	{
@@ -39,33 +40,58 @@ function init(){
 		var tasks =  [];
 		tasks.push({
 			title: 'My First Task',
-			days: ["3","5"]
+			days: ["3","5"],
+			time: {
+				hour: "00",
+				minute: "00"
+			}
 		});
 		localStorage.display=JSON.stringify(tasks);	
 	}
 }
+
+function timeAlert() {
+// setup our daily alerter
+	setInterval(function() {
+		console.log('checking at the interval...');
+    	if(currentDay == 3) {
+	    	alert('You need to complete a task today!');
+    	}
+	}, 600000); //every 600 seconds
+}
+	
+	
 			
 function addIt() {
-	var title = $('input#title').val();
-	
+	var title = $('input#title').val();	//Stores title from HTML
+	var days = [];
+			
+	//Check for empty fields
 	if(title == '' || $('input:checked').length == 0) {
 		alert('No empty fields, boss!');
 		return;	
 	}
 	
+	//Reset title field to null
 	$('input#title').val('');
-	var days = [];
+	
+	//For each checked input box, push the value to the array "days", then uncheck box.
 	$('input:checked').each(function(){
 		days.push($(this).val());
 		$(this).prop('checked',false);
 	});	
 	
-		
+	//Set array "tasks" to what was previously saved to local storage
 	var tasks = JSON.parse(localStorage.display);
 	
+	//Add to "tasks" new items user just submitted.
 	tasks.push({
 		title: title,
-		days: days
+		days: days,
+		time: {
+			hour: $('input#hours').val(),
+			minute: $('input#minutes').val()
+		}
 	});
 	//console.log(tasks);
 	
@@ -87,6 +113,11 @@ function dailyAgenda() {
 	var titleDisplay = '';
 	
 	var d = new Date();
+/*
+	getHours()
+	getMinutes()
+*/
+
 	var currentDay = d.getDay()+1; 
 	
 	var weekday=new Array(7);
@@ -106,14 +137,6 @@ function dailyAgenda() {
 		}
 	}); 
 	
-	// setup our daily alerter
-	setInterval(function() {
-		console.log('checking at the interval...');
-    	if(currentDay == 3) {
-	    	alert('You need to complete a task today!');
-    	}
-	}, 60000); //every 60 seconds
-	
 	taskSetDisplay += '<h3>'+dayName+'</h3><ul>'+titleDisplay+'</ul>';
 	$('#agenda').fadeOut(function(){
 		$(this).html(taskSetDisplay).fadeIn();
@@ -126,12 +149,10 @@ function updateThisOneTinyField() {
 	var taskSetDisplay = '';
 	$.each(tasks, function(index, value) {
 		// transform the days array to the names of the dates
-		var titleDisplay = '';
+
 		var daysDisplay = makeEmWords(value);
-				
-		titleDisplay += value.title;
-				
-    	taskSetDisplay += '<h3>'+titleDisplay+'</h3><ul>'+daysDisplay+'</ul>';
+						
+    	taskSetDisplay += '<h3>'+value.title+'</h3><ul>'+daysDisplay+'</ul><ul>'+value.time.hour+':'+value.time.minute+'</ul>';
 	}); 
 	
 	$('#result').html(taskSetDisplay);
