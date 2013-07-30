@@ -51,24 +51,21 @@ function init(){
 }
 
 function dailyAlert() {
-	var tasks = JSON.parse(localStorage.display);
-	var taskSetDisplay = '';
-		
-	var d = new Date();
-	var currentDay = d.getDay()+1; 
-			
 	setInterval(function() {
-		console.log('Checking for 0530, every 1 minute '+d.getHours()+d.getMinutes());
-		if(d.getHours() == '16' && d.getMinutes() == '16') {
+		var d = new Date();
+		var currentDay = d.getDay()+1;
+		if(d.getHours() == '16' && d.getMinutes() == '28') {
+			var tasks = JSON.parse(localStorage.display);
 			var titleDisplay = '';
 			$.each(tasks, function(index, value) {
 				if(value.days.indexOf(currentDay.toString()) > -1) {
-				titleDisplay += value.title;
+				titleDisplay += value.title+'\n';
 			}
 		}); 
-		alert('You need to complete a task today!'+titleDisplay);
+		alert('You need to complete a task today!\n'+titleDisplay);
     	}
-	}, 60000); //every 60 seconds
+		console.log('Checking for 0530, every 1 minute '+d.getHours()+d.getMinutes());
+	}, 10000); //every 10 seconds
 }
 	
 	
