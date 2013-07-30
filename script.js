@@ -122,11 +122,8 @@ function addIt() {
 		});
 	}
 	
-<<<<<<< HEAD
+
 	//console.log('Added: '+title+' '+days+' '+tasks.time.hour+':'+tasks.time.minute+'Total tasks: '+Object.keys(tasks).length);
-=======
-	//console.log('Added: '+title+' '+days+' '+time+'Total tasks: '+Object.keys(tasks).length);
->>>>>>> d6d4a5f633c985cf784e26b214324abd7a4a81d3
 	//console.log(tasks);
 	
 	localStorage.display=JSON.stringify(tasks);
