@@ -1,14 +1,13 @@
 //visual and interactions
 $(document).ready(function(){
 	// toggler
-	$('a.toggler').click(function(){
-		var $form = $(this).parent();
-		if($form.hasClass('visible'))
-			$form.animate({top:'-360px'}, 300).removeClass('visible');
+	$('#page').on('click','a.toggler, li.js-clickable',function(){
+		var $interaction = $('div#interaction');
+		if($interaction.hasClass('visible'))
+			$interaction.animate({top:'-360px'}, 300).removeClass('visible');
 		else {
-			$form.animate({top:'0px'}, 300).addClass('visible');
-			$form.find('input#title').focus();
+			$interaction.animate({top:'0px'}, 300).addClass('visible');
+			$interaction.find('input#title').focus();
 		}
-		
 	});
 });
