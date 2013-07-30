@@ -119,7 +119,7 @@ h1 {
 }
 h1 a {
 	display: block;
-	font-family: "Lucida Handwriting", cursive, sans-serif;
+	font-family: "Lucida Handwriting", "Georgia", cursive, sans-serif;
 	font-weight: normal;
 	font-style: italic;
 	text-align: left;
@@ -177,6 +177,7 @@ div#interaction {
 	-moz-box-sizing: border-box;
 	top: -360px;
 	background-color: rgba(255,255,255,0.96);
+	z-index:2;
 }
 div#interaction a.toggler {
 	position: absolute;
