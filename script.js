@@ -1,11 +1,9 @@
 $(document).ready(function(){
 	init();
-	if(typeof(Storage)!=="undefined")
-	  {
-		dailyAgenda();
-		updateThisOneTinyField();
+	if(typeof(Storage)!=="undefined") {
+		agenda();
 		dailyAlert();
-	  }
+	}
 	else
 	{
 		$('#result').innerHTML="Sorry, your browser does not support web storage...";
@@ -19,11 +17,11 @@ $(document).ready(function(){
 		//Set form attribute 'data-id' to index number of item being edited
 		$form.attr('data-id',taskId); 
 						
-		//change the input title
+		//populate the input title
 		var title = tasks[taskId].title;
 		$form.find('input#title').val(title).focus();
 		
-		//change the day checkboxes
+		//populate the day checkboxes
 		$form.find('input[type=checkbox]').prop('checked',false);
 		
 		for(var i = 0; i < tasks[taskId].days.length; i++) {
@@ -34,7 +32,7 @@ $(document).ready(function(){
 			});
 		}
 		
-		//change the input times
+		//populate the input times
 		$form.find('input#hours').val(tasks[taskId].time.hour);
 		$form.find('input#minutes').val(tasks[taskId].time.minute);
 	});
@@ -71,7 +69,7 @@ function dailyAlert() {
 		alert('You need to complete a task today!\n'+titleDisplay);
     	}
 		console.log('Checking for 0530, every 1 minute '+d.getHours()+d.getMinutes());
-	}, 60000); //every 10 seconds
+	}, 60000);
 }
 	
 	
@@ -122,26 +120,25 @@ function addIt() {
 		});
 	}
 	
-	//Reset form
-	$form[0].reset();
-	$form.attr('data-id','');
 	
 	console.log('Added: '+title+' '+days+' '+$('input#hours').val()+':'+$('input#minutes').val()+' Total tasks: '+Object.keys(tasks).length);
 	//console.log(tasks);
 	
+	//Reset form
+	$form[0].reset();
+	$form.attr('data-id','');
+		
 	localStorage.display=JSON.stringify(tasks);
-	dailyAgenda();
-	updateThisOneTinyField();
+	agenda();
 }
 
 function wipeIt() {
 	localStorage.clear(); 
 	init(); //  :-)
-	dailyAgenda();
-	updateThisOneTinyField();
+	agenda();
 }
 
-function dailyAgenda() {
+function agenda() {
 	var tasks = JSON.parse(localStorage.display);
 	var taskSetDisplay = '';
 	var titleDisplay = '';
@@ -157,16 +154,28 @@ function dailyAgenda() {
 	weekday[4]="Thursday";
 	weekday[5]="Friday";
 	weekday[6]="Saturday";
-
-	 
+	
+	var weekdayAbr=new Array(7);
+	weekdayAbr[0]="Sun";
+	weekdayAbr[1]="Mon";
+	weekdayAbr[2]="Tues";
+	weekdayAbr[3]="Wed";
+	weekdayAbr[4]="Thur";
+	weekdayAbr[5]="Fri";
+	weekdayAbr[6]="Sat";
 	
 	for(var i=0;i<7;i++){
 		if(currentDay > 7)
 			currentDay = currentDay - 7;
-		var dayName = weekday[currentDay-1];
+			var dayName = weekday[currentDay-1];
 		$.each(tasks, function(index, value) {
 			if(value.days.indexOf(currentDay.toString()) > -1) {
-				titleDisplay += '<li class="js-clickable" data-id='+index+'>'+value.title+'</li>';
+				titleDisplay += '<li class="js-clickable" data-id='+index+'> > '+value.title+': ';
+				$.each(value.days, function(index, valueTwo) {
+					var dayNameAbr = weekdayAbr[valueTwo-1];
+					titleDisplay += ' '+dayNameAbr+' ';
+				});
+				titleDisplay = titleDisplay+value.time.hour+value.time.minute+'</li>';
 			}
 		}); 
 		taskSetDisplay += '<h3>'+dayName+'</h3><ul>'+titleDisplay+'</ul>';
@@ -180,7 +189,7 @@ function dailyAgenda() {
 	});
 }
 
-	
+/*	
 function updateThisOneTinyField() {
 	var tasks = JSON.parse(localStorage.display);
 	var taskSetDisplay = '';
@@ -226,3 +235,4 @@ function makeEmWords(value) {
 	}
 	return daysDisplay;
 }
+*/
