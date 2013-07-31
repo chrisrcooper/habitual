@@ -272,6 +272,10 @@ li.js-clickable {
 li.js-clickable:hover {
 	color: #777;
 }
+#page section ul li span {
+	color: #999;
+	font-size: 0.7em;
+}
 #page section ul li label,
 #page section ul li.js-clickable,
 #page section h3,

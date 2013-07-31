@@ -71,8 +71,6 @@ function dailyAlert() {
 		console.log('Checking for 0530, every 1 minute '+d.getHours()+d.getMinutes());
 	}, 60000);
 }
-	
-	
 			
 function addIt() {
 	var title = $('input#title').val();	//Stores title from HTML
@@ -170,12 +168,12 @@ function agenda() {
 			var dayName = weekday[currentDay-1];
 		$.each(tasks, function(index, value) {
 			if(value.days.indexOf(currentDay.toString()) > -1) {
-				titleDisplay += '<li class="js-clickable" data-id='+index+'> > '+value.title+': ';
+				titleDisplay += '<li class="js-clickable" data-id='+index+'> > '+value.title+': <span>';
 				$.each(value.days, function(index, valueTwo) {
 					var dayNameAbr = weekdayAbr[valueTwo-1];
 					titleDisplay += ' '+dayNameAbr+' ';
 				});
-				titleDisplay = titleDisplay+value.time.hour+value.time.minute+'</li>';
+				titleDisplay = titleDisplay+value.time.hour+value.time.minute+'</span></li>';
 			}
 		}); 
 		taskSetDisplay += '<h3>'+dayName+'</h3><ul>'+titleDisplay+'</ul>';
@@ -188,6 +186,11 @@ function agenda() {
 		$(this).html(taskSetDisplay).fadeIn();
 	});
 }
+
+
+
+
+
 
 /*	
 function updateThisOneTinyField() {
