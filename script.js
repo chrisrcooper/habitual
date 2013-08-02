@@ -67,8 +67,8 @@ function init(){
 				minute: "00"
 			},
 			timeEnd: {
-				hour: "17",
-				minute: "00"
+				hour: "23",
+				minute: "59"
 			},
 			repeat: "1"
 		},
@@ -138,6 +138,7 @@ function taskAlert() {
 			if(current == starting || (current > starting && current < ending && (current-starting)%repeatFreq == 0)) {
 				//displayTasks = displayTasks+'\n'+value.title;  // Use this later to make only one alert show per minute, if more than one task is found... this code is incomplete
 				alert('Time to:\n'+value.title);
+				document.getElementById('alertsound').play();
 				console.log('Do this now:'+value.title);
 			}
 			console.log('Addition:'+starting+'-'+ending+'Current'+current);
