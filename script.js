@@ -147,7 +147,7 @@ function taskAlert() {
 		
 		//$('#alert').fadeOut(function(){
 			if($('#alert').hasClass('visible')) {
-				$('#alert').animate({height:'-=50px'}, 3000).removeClass('visible');
+				$('#alert').animate({height:'-=75px'}, 3000).removeClass('visible');
 			//	$(this).html('').fadeIn();
 			}
 		//});
@@ -163,29 +163,36 @@ function taskAlert() {
 		
 		var current = hourTimesSixty+minute;
 				
-		var displayTasks = '';
+		//var displayTasks = '';
 		
-		$.each(tasks, function(index, value) {
-			/*
+		/*
 			var starting=parseInt(value.timeStart.hour+value.timeStart.minute);
 			var ending=parseInt(value.timeEnd.hour+value.timeEnd.minute);
-			var minuteString=minute.toString();
-			if(minuteString.length < 2)
-				var minuteString = '0'+minute.toString();
 			var current=parseInt(hour.toString()+minuteString);
-			*/
-			
+		*/
+		
+		var hourString=hour.toString();
+			if(hourString.length < 2)
+				hourString = '0'+hour.toString();
+				
+		var minuteString=minute.toString();
+			if(minuteString.length < 2)
+				minuteString = '0'+minute.toString();
+		
+		
+		$.each(tasks, function(index, value) {
+					
 			var starting = parseInt(value.timeStart.hour)*60 + parseInt(value.timeStart.minute);
 			var ending = parseInt(value.timeEnd.hour)*60 + parseInt(value.timeEnd.minute);
 			
 			var repeatFreq = parseInt(value.repeat);
-			if(current == starting || (current > starting && current < ending && (current-starting)%repeatFreq == 0)) {
+			if(current == starting || (current > starting && current <= ending && (current-starting)%repeatFreq == 0)) {
 				//displayTasks = displayTasks+'\n'+value.title;  // Use this later to make only one alert show per minute, if more than one task is found... this code is incomplete
 				console.log('Do this now:'+value.title);
 				document.getElementById('alertsound').play();
-				$('#alert').animate({height:'+=50px'}, 300).addClass('visible');
+				$('#alert').animate({height:'+=75px'}, 300).addClass('visible');
 				$('#alert').fadeOut(function(){
-					$(this).html('Time to: '+value.title).fadeIn();
+					$(this).html('<br><center>Time for your '+hourString+minuteString+' &#34;'+value.title+'&#34;').fadeIn()+'</center>';
 				});
 				//alert('Time to:\n'+value.title);
 							
