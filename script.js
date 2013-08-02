@@ -278,6 +278,8 @@ function deleteIt() {
 	var $form = $('div#interaction form');
 	var days = [];
 	
+	//resets text of "add" button to "Add"
+	$('#addOrEditButton').text('Add');
 	
 	//For each checked input box, push the value to the array "days".  Currently this is only used to create a log of what was deleted.
 	$('input:checked').each(function(){
