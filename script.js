@@ -33,8 +33,11 @@ $(document).ready(function(){
 		}
 		
 		//populate the input times
-		$form.find('input#hours').val(tasks[taskId].time.hour);
-		$form.find('input#minutes').val(tasks[taskId].time.minute);
+		$form.find('input#hours').val(tasks[taskId].timeStart.hour);
+		$form.find('input#minutes').val(tasks[taskId].timeStart.minute);
+		$form.find('input#hoursEnd').val(tasks[taskId].timeEnd.hour);
+		$form.find('input#minutesEnd').val(tasks[taskId].timeEnd.minute);
+		$form.find('input#repeat').val(tasks[taskId].repeat);
 	});
 });
 
@@ -45,10 +48,41 @@ function init(){
 		tasks.push({
 			title: 'My First Task',
 			days: ["3","5"],
-			time: {
+			timeStart: {
 				hour: "01",
 				minute: "27"
-			}
+			},
+			timeEnd: {
+				hour: "",
+				minute: ""
+			},
+			repeat: ""
+		},
+		{
+			title: 'Get up and walk',
+			days: ["2","3","4","5","6"],
+			timeStart: {
+				hour: "09",
+				minute: "00"
+			},
+			timeEnd: {
+				hour: "17",
+				minute: "00"
+			},
+			repeat: "60"
+		},
+		{
+			title: 'Guitar',
+			days: ["2","4","6"],
+			timeStart: {
+				hour: "18",
+				minute: "00"
+			},
+			timeEnd: {
+				hour: "19",
+				minute: "00"
+			},
+			repeat: "20"
 		});
 		localStorage.display=JSON.stringify(tasks);	
 	}
@@ -101,10 +135,15 @@ function addIt() {
 		tasks[$form.attr('data-id')] = {
 			title: title,
 			days: days,
-			time: {
+			timeStart: {
 				hour: $('input#hours').val(),
 				minute: $('input#minutes').val()
-			}
+			},
+			timeEnd: {
+				hour: $('input#hoursEnd').val(),
+				minute: $('input#minutesEnd').val()
+			},
+			repeat: $('input#repeat').val()
 		};
 	}
 	else{
@@ -112,15 +151,20 @@ function addIt() {
 		tasks.push({
 			title: title,
 			days: days,
-			time: {
+			timeStart: {
 				hour: $('input#hours').val(),
 				minute: $('input#minutes').val()
-			}
+			},
+			timeEnd: {
+				hour: $('input#hoursEnd').val(),
+				minute: $('input#minutesEnd').val()
+			},
+			repeat: $('input#repeat').val()
 		});
 	}
 	
 	
-	console.log('Added: '+title+' '+days+' '+$('input#hours').val()+':'+$('input#minutes').val()+' Total tasks: '+Object.keys(tasks).length);
+	console.log('Added: '+title+' '+days+' '+$('input#hours').val()+':'+$('input#minutes').val()+'-'+$('input#hoursEnd').val()+':'+$('input#minutesEnd').val()+' R:'+$('input#repeat').val()+' Total tasks: '+Object.keys(tasks).length);
 	console.log(tasks);
 	
 	//Reset form
@@ -158,7 +202,7 @@ function deleteIt() {
 	}
 
 	
-	console.log('Removed: '+$('input#title').val()+' '+days+' '+$('input#hours').val()+':'+$('input#minutes').val()+' Total tasks: '+Object.keys(tasks).length);
+	console.log('Removed: '+$('input#title').val()+' '+days+' '+$('input#hours').val()+':'+$('input#minutes').val()+'-'+$('input#hoursEnd').val()+':'+$('input#minutesEnd').val()+' R:'+$('input#repeat').val()+' Total tasks: '+Object.keys(tasks).length);
 	console.log(tasks);
 	
 	//Reset form
@@ -172,7 +216,7 @@ function deleteIt() {
 	agenda();
 }
 
-function wipeAll() {
+function resetTasks() {
 	localStorage.clear(); 
 	init(); //  :-)
 	agenda();
@@ -215,7 +259,7 @@ function agenda() {
 					var dayNameAbr = weekdayAbr[valueTwo-1];
 					titleDisplay += ' '+dayNameAbr+' ';
 				});
-				titleDisplay = titleDisplay+value.time.hour+value.time.minute+'</span></li>';
+				titleDisplay = titleDisplay+value.timeStart.hour+value.timeStart.minute+'-'+value.timeEnd.hour+value.timeEnd.minute+' R:'+value.repeat+'</span></li>';
 			}
 		}); 
 		taskSetDisplay += '<h3>'+dayName+'</h3><ul>'+titleDisplay+'</ul>';
@@ -243,7 +287,7 @@ function updateThisOneTinyField() {
 
 		var daysDisplay = makeEmWords(value);
 						
-    	taskSetDisplay += '<h3>'+value.title+'</h3><ul>'+daysDisplay+'</ul><ul>'+value.time.hour+':'+value.time.minute+'</ul>';
+    	taskSetDisplay += '<h3>'+value.title+'</h3><ul>'+daysDisplay+'</ul><ul>'+value.timeStart.hour+':'+value.timeStart.minute+'</ul>';
 	}); 
 	
 	$('#result').html(taskSetDisplay);

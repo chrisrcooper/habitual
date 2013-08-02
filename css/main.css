@@ -175,11 +175,11 @@ ul, li {
 
 div#interaction {
 	position: absolute;
-	height: 360px;
+	height: 460px;
 	width: 100%;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
-	top: -360px;
+	top: -460px;
 	background-color: rgba(255,255,255,0.96);
 	z-index:2;
 }

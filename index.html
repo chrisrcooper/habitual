@@ -40,17 +40,28 @@
 							<label><input type="checkbox" name="days[]" value="6">Friday</label><br>
 							<label><input type="checkbox" name="days[]" value="7">Saturday</label><br>
 							<br>
-							<label>Time:
+							<label>Start time:
 								<input name="hours" id="hours" placeholder="HH" maxlength="2" size="2">
 							</label>
 							<label>&nbsp;:&nbsp;
 								<input name="minutes" id="minutes" placeholder="MM" maxlength="2" size="2">
 							</label>
+							<br>
+							<label>End time:
+								<input name="hoursEnd" id="hoursEnd" placeholder="HH" maxlength="2" size="2">
+							</label>
+							<label>&nbsp;:&nbsp;
+								<input name="minutesEnd" id="minutesEnd" placeholder="MM" maxlength="2" size="2">
+							</label>
+							<br>
+							<label>Repeat rate:
+								<input name="repeat" id="repeat" placeholder="MM" maxlength="2" size="2">
+							</label>
 						</div>
 						<div class="controls">
 							<button type="button" onclick="addIt();" class="toggler">Add It</button>
 							<button type="button" onclick="deleteIt();" class="toggler">Delete It</button>
-							<button type="button" onclick="wipeAll();" class="negative">Wipe All</button>
+							<button type="button" onclick="resetTasks();" class="toggler">Reset</button>
 						</div>
 					</fieldset>
 				</form>
