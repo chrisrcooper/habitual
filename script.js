@@ -3,6 +3,7 @@ $(document).ready(function(){
 	if(typeof(Storage)!=="undefined") {
 		agenda();
 		dailyAlert();
+		taskAlert();
 	}
 	else
 	{
@@ -104,6 +105,42 @@ function dailyAlert() {
     	}
 		console.log('Checking for 0530, every 1 minute '+d.getHours()+d.getMinutes());
 	}, 60000);
+}
+
+function taskAlert() {
+	setInterval(function() {
+		var tasks = JSON.parse(localStorage.display);
+		var d = new Date();
+		var currentDay = d.getDay()+1;
+		var hour = d.getHours();
+		var minute = d.getMinutes();
+					
+		var titleDisplay = '';
+		$.each(tasks, function(index, value) {
+			var starting=parseInt(value.timeStart.hour+value.timeStart.minute);
+			var ending=parseInt(value.timeEnd.hour+value.timeEnd.minute);
+			var minuteString=minute.toString();
+			if(minuteString.length < 2)
+				var minuteString = '0'+minute.toString();
+			var current=parseInt(hour.toString()+minuteString);
+			var repeatFreq = parseInt(value.repeat);
+			if(current == starting || (current > starting && current < ending && (current-starting)%repeatFreq == 0)) {
+				console.log('Do this now:'+value.title);
+			}
+			console.log('Addition:'+starting+'-'+ending+'Current'+current);
+			//console.log((current-starting)%repeatFreq);
+		});
+/*		
+			if(value.days.indexOf(currentDay.toString()) > -1) {
+				titleDisplay += value.title+'\n';
+			}
+		}); 
+		
+		alert('You need to complete a task today!\n'+titleDisplay);
+    	
+		console.log('Checking for 0530, every 1 minute '+d.getHours()+d.getMinutes());
+*/
+	}, 3000);
 }
 			
 function addIt() {
