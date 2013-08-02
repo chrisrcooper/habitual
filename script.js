@@ -85,7 +85,7 @@ function addIt() {
 	//Reset title field to null
 	//$('input#title').val('');
 	
-	//For each checked input box, push the value to the array "days", then uncheck box.
+	//For each checked input box, push the value to the array "days", then uncheck box (the unchecking is no longer necessary as form reset is done at end of function).
 	$('input:checked').each(function(){
 		days.push($(this).val());
 	//	$(this).prop('checked',false);
@@ -95,7 +95,8 @@ function addIt() {
 	var tasks = JSON.parse(localStorage.display);
 	
 	var $form = $('div#interaction form');
-		
+	
+	//If user is editing an existing task, save over that task; 'data-id' was set in the main function upon a click event with '$form.attr('data-id',taskId);'
 	if($form.attr('data-id')) {
 		tasks[$form.attr('data-id')] = {
 			title: title,
@@ -120,17 +121,58 @@ function addIt() {
 	
 	
 	console.log('Added: '+title+' '+days+' '+$('input#hours').val()+':'+$('input#minutes').val()+' Total tasks: '+Object.keys(tasks).length);
-	//console.log(tasks);
+	console.log(tasks);
 	
 	//Reset form
 	$form[0].reset();
 	$form.attr('data-id','');
-		
+	
+	//Save to local storage
 	localStorage.display=JSON.stringify(tasks);
+	
+	//Reload agenda
 	agenda();
 }
 
-function wipeIt() {
+function deleteIt() {
+	//Set object "tasks" to what was previously saved to local storage
+	var tasks = JSON.parse(localStorage.display);
+	var $form = $('div#interaction form');
+	var days = [];
+	
+	//For each checked input box, push the value to the array "days".  Currently this is only used to create a log of what was deleted.
+	$('input:checked').each(function(){
+		days.push($(this).val());
+	});	
+	
+	
+	
+	//If user is trying to delete existing task, remove that task, otherwise provide alert; 'data-id' was set in the main function upon a click event with '$form.attr('data-id',taskId);'
+	if($form.attr('data-id')) {
+		delete tasks[$form.attr('data-id')];
+		tasks.splice($form.attr('data-id'),1);
+	}
+	else{
+		//Add to "tasks" new items user just submitted.
+		alert('Nothing to delete!');
+	}
+
+	
+	console.log('Removed: '+$('input#title').val()+' '+days+' '+$('input#hours').val()+':'+$('input#minutes').val()+' Total tasks: '+Object.keys(tasks).length);
+	console.log(tasks);
+	
+	//Reset form
+	$form[0].reset();
+	$form.attr('data-id','');
+	
+	//Save to local storage
+	localStorage.display=JSON.stringify(tasks);
+	
+	//Reload agenda
+	agenda();
+}
+
+function wipeAll() {
 	localStorage.clear(); 
 	init(); //  :-)
 	agenda();

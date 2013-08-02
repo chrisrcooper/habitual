@@ -42,13 +42,15 @@
 							<br>
 							<label>Time:
 								<input name="hours" id="hours" placeholder="HH" maxlength="2" size="2">
-								&nbsp;:&nbsp;
+							</label>
+							<label>&nbsp;:&nbsp;
 								<input name="minutes" id="minutes" placeholder="MM" maxlength="2" size="2">
 							</label>
 						</div>
 						<div class="controls">
 							<button type="button" onclick="addIt();" class="toggler">Add It</button>
-							<button type="button" onclick="wipeIt();" class="negative">Wipe It</button>
+							<button type="button" onclick="deleteIt();" class="toggler">Delete It</button>
+							<button type="button" onclick="wipeAll();" class="negative">Wipe All</button>
 						</div>
 					</fieldset>
 				</form>
