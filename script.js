@@ -70,7 +70,7 @@ function init(){
 				hour: "23",
 				minute: "59"
 			},
-			repeat: "1"
+			repeat: "15"
 		},
 		{
 			title: 'Guitar',
@@ -84,6 +84,18 @@ function init(){
 				minute: "00"
 			},
 			repeat: "5"
+		},{
+			title: 'Pushups',
+			days: ["2","3","4","5","6"],
+			timeStart: {
+				hour: "18",
+				minute: "00"
+			},
+			timeEnd: {
+				hour: "20",
+				minute: "00"
+			},
+			repeat: "20"
 		});
 		localStorage.display=JSON.stringify(tasks);	
 	}
@@ -109,6 +121,15 @@ function dailyAlert() {
 
 function taskAlert() {
 	setInterval(function() {
+		
+		//$('#alert').fadeOut(function(){
+			if($('#alert').hasClass('visible')) {
+				$('#alert').animate({height:'-=50px'}, 3000).removeClass('visible');
+			//	$(this).html('').fadeIn();
+			}
+		//});
+		
+		
 		var tasks = JSON.parse(localStorage.display);
 		var d = new Date();
 		var currentDay = d.getDay()+1;
@@ -137,15 +158,20 @@ function taskAlert() {
 			var repeatFreq = parseInt(value.repeat);
 			if(current == starting || (current > starting && current < ending && (current-starting)%repeatFreq == 0)) {
 				//displayTasks = displayTasks+'\n'+value.title;  // Use this later to make only one alert show per minute, if more than one task is found... this code is incomplete
-				alert('Time to:\n'+value.title);
-				document.getElementById('alertsound').play();
 				console.log('Do this now:'+value.title);
+				document.getElementById('alertsound').play();
+				$('#alert').animate({height:'+=50px'}, 300).addClass('visible');
+				$('#alert').fadeOut(function(){
+					$(this).html('Time to: '+value.title).fadeIn();
+				});
+				//alert('Time to:\n'+value.title);
+							
 			}
 			console.log('Addition:'+starting+'-'+ending+'Current'+current);
 			//console.log((current-starting)%repeatFreq);
 		});
 		//alert('Time to:\n'+displayTasks);// Use this later to make only one alert show per minute, if more than one task is found... this code is incomplete
-	}, 60000);
+	}, 10000);
 }
 			
 function addIt() {
