@@ -70,7 +70,7 @@ function init(){
 				hour: "17",
 				minute: "00"
 			},
-			repeat: "60"
+			repeat: "1"
 		},
 		{
 			title: 'Guitar',
@@ -83,7 +83,7 @@ function init(){
 				hour: "19",
 				minute: "00"
 			},
-			repeat: "20"
+			repeat: "5"
 		});
 		localStorage.display=JSON.stringify(tasks);	
 	}
@@ -114,33 +114,37 @@ function taskAlert() {
 		var currentDay = d.getDay()+1;
 		var hour = d.getHours();
 		var minute = d.getMinutes();
-					
-		var titleDisplay = '';
+
+		var hourTimesSixty = hour*60;
+		
+		var current = hourTimesSixty+minute;
+				
+		var displayTasks = '';
+		
 		$.each(tasks, function(index, value) {
+			/*
 			var starting=parseInt(value.timeStart.hour+value.timeStart.minute);
 			var ending=parseInt(value.timeEnd.hour+value.timeEnd.minute);
 			var minuteString=minute.toString();
 			if(minuteString.length < 2)
 				var minuteString = '0'+minute.toString();
 			var current=parseInt(hour.toString()+minuteString);
+			*/
+			
+			var starting = parseInt(value.timeStart.hour)*60 + parseInt(value.timeStart.minute);
+			var ending = parseInt(value.timeEnd.hour)*60 + parseInt(value.timeEnd.minute);
+			
 			var repeatFreq = parseInt(value.repeat);
 			if(current == starting || (current > starting && current < ending && (current-starting)%repeatFreq == 0)) {
+				//displayTasks = displayTasks+'\n'+value.title;  // Use this later to make only one alert show per minute, if more than one task is found... this code is incomplete
+				alert('Time to:\n'+value.title);
 				console.log('Do this now:'+value.title);
 			}
 			console.log('Addition:'+starting+'-'+ending+'Current'+current);
 			//console.log((current-starting)%repeatFreq);
 		});
-/*		
-			if(value.days.indexOf(currentDay.toString()) > -1) {
-				titleDisplay += value.title+'\n';
-			}
-		}); 
-		
-		alert('You need to complete a task today!\n'+titleDisplay);
-    	
-		console.log('Checking for 0530, every 1 minute '+d.getHours()+d.getMinutes());
-*/
-	}, 3000);
+		//alert('Time to:\n'+displayTasks);// Use this later to make only one alert show per minute, if more than one task is found... this code is incomplete
+	}, 60000);
 }
 			
 function addIt() {
