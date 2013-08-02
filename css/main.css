@@ -94,9 +94,9 @@ textarea {
    ========================================================================== */
 body {
 	background-image: url(../img/bg-body.png);
-	background-color: #0b1551;
+	background-color: #000000; 
 	font-family: "Georgia", serif;
-	color: #343434;
+	color: #EBEBEB;
 	padding-bottom: 40px;
 }
 #page {
@@ -111,8 +111,8 @@ body {
 	-moz-box-sizing: border-box;
 	margin: 0 auto;
 	background-image: url(../img/bg-page.png);
-	background-color: #e1e5fe;
-	box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.35);
+	background-color: #000000;
+	box-shadow: 0px 0px 10px 1px rgba(255,255,255,0.35);
 	
 	position: relative;
 }
@@ -126,13 +126,13 @@ h1 a {
 	letter-spacing: -1px;
 	font-weight: normal;
 	font-style: italic;
-	text-align: left;
-	background-color: #e47c7c;
+	text-align: center;
+	background-color: #333333;
 	color: #ffebeb;
 	text-shadow: 0 1px 0 rgba(0,0,0,0.25);
 	text-transform: capitalize;
 	padding: 5px 20px;
-	border-bottom: 2px solid #b66060;
+	border-bottom: 2px solid #cccccc;
 	text-decoration: none;
 	-moz-transition: color 300ms;
 }
@@ -146,7 +146,7 @@ legend {
 	font-weight: normal;
 	text-shadow: 0 1px 0 #fff;
 	font-size: 1.3em;
-	color: #e47c7c;
+	color: #b8b8b8;
 	margin-bottom: 10px;
 	padding-bottom: 10px;
 	border-bottom: 1px dotted #eee;
@@ -180,7 +180,7 @@ div#interaction {
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	top: -460px;
-	background-color: rgba(255,255,255,0.96);
+	background-color: rgba(0,0,0,0.96);
 	z-index:2;
 }
 div#interaction a.toggler {
@@ -218,7 +218,7 @@ div#interaction form button {
 	padding: 0;
 	margin: 0;
 	
-	background-color: #E47C7C;
+	background-color: #666666;
 	border-radius: 10px;
 	color: #ffebeb;
 	padding: 5px 10px 3px 10px;
@@ -273,7 +273,7 @@ li.js-clickable:hover {
 	color: #777;
 }
 #page section ul li span {
-	color: #999;
+	color: #cccccc;
 	font-size: 0.7em;
 }
 #page section ul li label,
@@ -303,7 +303,7 @@ li.js-clickable:hover {
 	font-weight: normal;
 	font-style: italic;
 	text-align: left;
-	background-color: #EFB0B0;
+	background-color: #666666;
 	color: #FFEDED;
 	text-shadow: 0 1px 0 rgba(0,0,0,0.25);
 	font-size: 1.2em;

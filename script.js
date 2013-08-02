@@ -39,8 +39,31 @@ $(document).ready(function(){
 		$form.find('input#hoursEnd').val(tasks[taskId].timeEnd.hour);
 		$form.find('input#minutesEnd').val(tasks[taskId].timeEnd.minute);
 		$form.find('input#repeat').val(tasks[taskId].repeat);
+		
+		//changes text of "add" button to "edit"
+		$('#addOrEditButton').text('Edit');
+		$('#addOrEditButton').after(' <button type="button" onclick="deleteIt();" class="toggler" id="deleteButton">Delete</button>');
 	});
+
+	
+	// toggler
+	$('#page').on('click','.toggler, li.js-clickable',function(){
+		var $interaction = $('div#interaction');
+		if($interaction.hasClass('visible')) {
+			$interaction.animate({top:'-460px'}, 300).removeClass('visible');
+			$('#addOrHideButton').text('Add');
+			//remove delete button after deletion
+			$('#deleteButton').remove();
+		}
+		else {
+			$interaction.animate({top:'0px'}, 300).addClass('visible');
+			$('#addOrHideButton').text('Hide');
+			$interaction.find('input#title').focus();
+		}
+	});	
+	
 });
+
 
 function init(){
 	//check if the localStorage has been used or this is new
@@ -178,6 +201,9 @@ function addIt() {
 	var title = $('input#title').val();	//Stores title from HTML
 	var days = [];
 				
+	//resets text of "add" button to "Add"
+	$('#addOrEditButton').text('Add');
+	
 	//Check for empty fields
 	if(title == '' || $('input:checked').length == 0) {
 		alert('No empty fields, boss!');
@@ -251,6 +277,7 @@ function deleteIt() {
 	var tasks = JSON.parse(localStorage.display);
 	var $form = $('div#interaction form');
 	var days = [];
+	
 	
 	//For each checked input box, push the value to the array "days".  Currently this is only used to create a log of what was deleted.
 	$('input:checked').each(function(){
